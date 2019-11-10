@@ -1,8 +1,17 @@
 //import bandcamp from 'bandcamp-scraper';
 
-import getAlbumInfo from '../lib/index';
 const fetch = require("node-fetch");
-// Cat Facts!
+const
+  htmlParser = require('./src/htmlParser.js'),
+  utils = require('./src/utils.js');
+
+const getAlbumInfo = async function (albumUrl) {
+  const album_info = await fetch(albumUrl)
+  const album_html = await album_info.text();
+  return htmlParser.parseAlbumInfo(album_html, albumUrl);
+};
+
+
 exports.sourceNodes = async ({
   actions,
   createNodeId,
