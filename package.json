@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-source-bandcamp",
+  "name": "@hartmamt/gatsby-source-bandcamp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,5 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "bandcamp-scraper": "^1.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hartmamt/gatsby-source-bandcamp.git"
   }
 }
