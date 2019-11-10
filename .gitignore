@@ -1,5 +1,4 @@
 /yarn.lock
 /*.js
 !index.js
-.npmrc
 /node_modules/
