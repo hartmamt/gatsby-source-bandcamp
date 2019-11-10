@@ -21,9 +21,10 @@ exports.sourceNodes = async ({
     if (error) {
       console.log(error);
     } else {
-      console.log(JSON.stringify(albumInfo));
+      console.log(JSON.stringify(albumInfo.tracks));
       // Process data into nodes.
-      albumInfo.tracks.forEach(datum => {
+      albumInfo.tracks.map(datum => {
+        console.log('datum', datum)
         const nodeContent = JSON.stringify(datum);
         const nodeMeta = {
           id: createNodeId(`bandcamp-${datum.name}`),
