@@ -1,5 +1,6 @@
-import bandcamp from 'bandcamp-scraper';
+//import bandcamp from 'bandcamp-scraper';
 
+import getAlbumInfo from '../lib/index';
 const fetch = require("node-fetch");
 // Cat Facts!
 exports.sourceNodes = async ({
@@ -17,30 +18,36 @@ exports.sourceNodes = async ({
 
 
   var albumUrl = 'https://pinegrove.bandcamp.com/album/skylight';
-  bandcamp.getAlbumInfo(albumUrl, function (error, albumInfo) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(JSON.stringify(albumInfo.tracks));
-      // Process data into nodes.
-      albumInfo.tracks.map(datum => {
-        console.log('datum', datum)
-        const nodeContent = JSON.stringify(datum);
-        const nodeMeta = {
-          id: createNodeId(`bandcamp-${datum.name}`),
-          parent: null,
-          children: [],
-          internal: {
-            type: `BandCamp`,
-            content: nodeContent,
-            contentDigest: createContentDigest(datum)
-          }
-        };
-        const node = Object.assign({}, datum, nodeMeta);
-        createNode(node);
-      });
-    }
+  const albumInfo = await getAlbumInfo(albumUrl);
+
+  albumInfo.tracks.map(datum => {
+    console.log('datum', datum)
+    const nodeContent = JSON.stringify(datum);
+    const nodeMeta = {
+      id: createNodeId(`bandcamp-${datum.name}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: `BandCamp`,
+        content: nodeContent,
+        contentDigest: createContentDigest(datum)
+      }
+    };
+    const node = Object.assign({}, datum, nodeMeta);
+    createNode(node);
   });
+  //   });
+
+
+  //   getAlbumInfo(albumUrl, function (error, albumInfo) {
+  //     if (error) {
+  //       console.log(error);
+  //     } else {
+  //       console.log(JSON.stringify(albumInfo.tracks));
+  //       // Process data into nodes.
+
+  //     }
+  //   });
 
 
   // We're done, return.

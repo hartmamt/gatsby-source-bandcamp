@@ -18,7 +18,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bandcamp-scraper": "^1.2.4"
+    "ajv": "^6.10.2",
+    "bandcamp-scraper": "^1.2.4",
+    "cheerio": "^1.0.0-rc.3",
+    "json5": "^2.1.1",
+    "linez": "^4.1.4",
+    "node-fetch": "^2.6.0",
+    "scrape-it": "^5.2.0",
+    "tinyreq": "^3.4.1"
   },
   "repository": {
     "type": "git",
