@@ -22,24 +22,25 @@ exports.sourceNodes = async ({
       console.log(error);
     } else {
       console.log(JSON.stringify(albumInfo));
+      // Process data into nodes.
+      albumInfo.tracks.forEach(datum => {
+        const nodeContent = JSON.stringify(datum);
+        const nodeMeta = {
+          id: createNodeId(`bandcamp-${datum.name}`),
+          parent: null,
+          children: [],
+          internal: {
+            type: `BandCamp`,
+            content: nodeContent,
+            contentDigest: createContentDigest(datum)
+          }
+        };
+        const node = Object.assign({}, datum, nodeMeta);
+        createNode(node);
+      });
     }
   });
-  //   // Process data into nodes.
-  //   data.all.forEach(datum => {
-  //     const nodeContent = JSON.stringify(datum);
-  //     const nodeMeta = {
-  //       id: createNodeId(`cat-facts-${datum._id}`),
-  //       parent: null,
-  //       children: [],
-  //       internal: {
-  //         type: `CatFacts`,
-  //         content: nodeContent,
-  //         contentDigest: createContentDigest(datum)
-  //       }
-  //     };
-  //     const node = Object.assign({}, datum, nodeMeta);
-  //     createNode(node);
-  //   });
+
 
   // We're done, return.
   return;
